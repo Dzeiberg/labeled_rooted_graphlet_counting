@@ -3,14 +3,14 @@ clc
 
 global BaseGraphs
 
-%alphabet = 'ACDEFGHIKLMNPQRSTVWY';
+% alphabet = 'ACDEFGHIKLMNPQRSTVWY';
 
 alphabet = 'ACDEFGHIKLMNPQRSTVWYacdefghiklmnpqrstvwy';
 
 load UnrootedGraphlets.mat
-%load phosY
-G = read_svml('residues.adj');
-L = fileread('wildtype.labels');
+load phosY
+% G = read_svml('residues.adj');
+% L = fileread('wildtype.labels');
 % graphlets to count
 %ns = [1 2 3 4 5];
 ns = [1 2 3 4 5];

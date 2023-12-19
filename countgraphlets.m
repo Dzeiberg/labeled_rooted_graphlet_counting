@@ -98,8 +98,8 @@ for n = ns
     ngraphs = size(v{n},2);
     for i = 1 : length(graphlets)
         position = graphlets{i}.S + (graphlets{i}.B - 1) * length(alphabet) ^ n;
-        % v{n}(position) = v{n}(position) + 1;
-        v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
+        v{n}(position) = v{n}(position) + 1;
+        % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
     end
     countvector = [countvector v{n}];
 end

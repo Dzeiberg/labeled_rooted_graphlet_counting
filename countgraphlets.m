@@ -62,9 +62,9 @@ for n = ns
                             
                             % DZ : Pre-allocate prm
                             % -----
-                            % prm = [];
+                            prm = [];
                             % -----
-                            prm = zeros(1 , size(bg, 1));
+                            %prm = zeros(1 , size(bg, 1));
                             % END DZ : Pre-allocate prm
 
                             for m = 1 : size(bg, 1)
@@ -103,14 +103,14 @@ for n = ns
     end
 
     % v = sparse(1, length(BaseGraphs{n}) * length(alphabet) ^ n);
-    sparse_indices = zeros(length(graphlets));
+    % sparse_indices = zeros(length(graphlets));
+    sparse_indices = [];
     for i = 1 : length(graphlets)
         position = graphlets{i}.S + (graphlets{i}.B - 1) * length(alphabet) ^ n;
         % v(position) = v(position) + 1;
         % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
-        sparse_indices(i) = position;
+        sparse_indices = [sparse_indices position];
     end
-    sparse_indices = sparse_indices(sparse_indices ~= 0);
     countvector = [countvector sparse(1, sparse_indices, 1, 1, length(BaseGraphs{n}) * length(alphabet) ^ n)];
 end
 

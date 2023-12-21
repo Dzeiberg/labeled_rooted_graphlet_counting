@@ -18,6 +18,7 @@ global BaseGraphs
 % sequence (L), index of sorted labels (S) and type of graphlet (B). 
 % Graphlets observed more than once will appear here as duplicates.
 graphlets = {};
+% TO DO: Pre-allocate graphlets
 
 % Sparse feature vector of counts. If a graphlet is observed more than
 % once, the countvector will have an appropriate count for that graphlet
@@ -58,7 +59,14 @@ for n = ns
                         %t = R' * bg * R;
                         t = R * bg * R';
                         if sum(sum(abs(g{j}.G - t))) == 0
+                            
+                            % DZ : Pre-allocate prm
+                            % -----
                             prm = [];
+                            % -----
+                            %prm = zeros(1 , size(bg, 1));
+                            % END DZ : Pre-allocate prm
+
                             for m = 1 : size(bg, 1)
                                 %prm(m) = find(bps(m, :, l) == 1);
                                 %prm(m) = find(R(m, :) == 1);
@@ -94,14 +102,21 @@ for n = ns
         end
     end
 
-    v{n} = sparse(1, length(BaseGraphs{n}) * length(alphabet) ^ n);
-    ngraphs = size(v{n},2);
+    % v = sparse(1, length(BaseGraphs{n}) * length(alphabet) ^ n);
+    % sparse_indices = zeros(length(graphlets));
+    sparse_indices = [];
     for i = 1 : length(graphlets)
         position = graphlets{i}.S + (graphlets{i}.B - 1) * length(alphabet) ^ n;
+<<<<<<< HEAD
         v{n}(position) = v{n}(position) + 1;
         % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
+=======
+        % v(position) = v(position) + 1;
+        % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
+        sparse_indices = [sparse_indices position];
+>>>>>>> optimize
     end
-    countvector = [countvector v{n}];
+    countvector = [countvector sparse(1, sparse_indices, 1, 1, length(BaseGraphs{n}) * length(alphabet) ^ n)];
 end
 
 return

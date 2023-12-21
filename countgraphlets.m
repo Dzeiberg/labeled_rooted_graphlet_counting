@@ -107,14 +107,7 @@ for n = ns
     sparse_indices = [];
     for i = 1 : length(graphlets)
         position = graphlets{i}.S + (graphlets{i}.B - 1) * length(alphabet) ^ n;
-<<<<<<< HEAD
-        v{n}(position) = v{n}(position) + 1;
-        % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
-=======
-        % v(position) = v(position) + 1;
-        % v{n} = v{n} + sparse(1,position, 1, 1, ngraphs);
         sparse_indices = [sparse_indices position];
->>>>>>> optimize
     end
     countvector = [countvector sparse(1, sparse_indices, 1, 1, length(BaseGraphs{n}) * length(alphabet) ^ n)];
 end

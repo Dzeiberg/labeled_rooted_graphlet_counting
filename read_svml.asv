@@ -1,9 +1,0 @@
-svml = table2array(readtable('residues.adj',"FileType",'text',"Delimiter",'\t','NumHeaderLines',0));
-r,c = [],[];
-for i = 1:size(svml,1)
-    neighbors = svml(i, ~isnan(svml(i,:)));
-    neighbors = neighbors(2:end) + 1;
-    disp([i neighbors]);
-    r = [r repelem(i,size(neighbors,2))];
-    c = [c neighbors];
-end
